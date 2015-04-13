@@ -47,7 +47,7 @@ class CountDownTimer
 	  Stop = true;
 	}
 
-	void StopTimerAt(unsigned int hours, unsigned int minutes, unsigned int seconds)
+	void StopTimerAt(unsigned long hours, unsigned long minutes, unsigned long seconds)
 	{
 	  if (TimeCheck(hours, minutes, seconds) )
 		Stop = true;
@@ -63,10 +63,10 @@ class CountDownTimer
 	  Paused = false;
 	}
 
-	void SetTimer(unsigned int hours, unsigned int minutes, unsigned int seconds)
+	void SetTimer(unsigned long hours, unsigned long minutes, unsigned long seconds)
 	{
 	  // This handles invalid time overflow ie 1(H), 0(M), 120(S) -> 1, 2, 0
-	  unsigned int _S = (seconds / 60), _M = (minutes / 60);
+	  unsigned long _S = (seconds / 60), _M = (minutes / 60);
 	  if(_S) minutes += _S;
 	  if(_M) hours += _M;
 	  
@@ -75,7 +75,7 @@ class CountDownTimer
 	  Stop = false;
 	}
 
-	void SetTimer(unsigned int seconds)
+	void SetTimer(unsigned long seconds)
 	{
 	 // StartTimer(seconds / 3600, (seconds / 3600) / 60, seconds % 60);
 	  Clock = seconds;
@@ -83,17 +83,17 @@ class CountDownTimer
 	  Stop = false;
 	}
 
-	int ShowHours()
+	long ShowHours()
 	{
 	  return Clock / 3600;
 	}
 
-	int ShowMinutes()
+	long ShowMinutes()
 	{
 	  return (Clock / 60) % 60;
 	}
 
-	int ShowSeconds()
+	long ShowSeconds()
 	{
 	  return Clock % 60;
 	}
@@ -113,14 +113,14 @@ class CountDownTimer
 	  return timeFlag;
 	}
 
-	boolean TimeCheck(unsigned int hours, unsigned int minutes, unsigned int seconds) // output true if timer equals requested time
+	boolean TimeCheck(unsigned long hours, unsigned long minutes, unsigned long seconds) // output true if timer equals requested time
 	{
 	  return (hours == ShowHours() && minutes == ShowMinutes() && seconds == ShowSeconds());
 	}
 	
     private:
 		unsigned long Watch, _micro, time = micros();
-		unsigned int Clock = 0, R_clock;
+		unsigned long Clock = 0, R_clock;
 		boolean Reset = false, Stop = false, Paused = false;
 		volatile boolean timeFlag = false;
 };
